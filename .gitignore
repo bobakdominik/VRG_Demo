@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/VRGHeightMap/.vs/VRGHeightMap
+/VRGHeightMap/HeightMapConsoleApp/obj
+/heightmap_ASCII.zip
+/VRGHeightMap/HeightMapApp/obj
+/VRGHeightMap/HeightMapTools/obj
