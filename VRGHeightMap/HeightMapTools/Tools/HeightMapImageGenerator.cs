@@ -13,10 +13,10 @@ namespace HeightMapTools.Tools
             
             using (Graphics g = Graphics.FromImage(bitmap))
             {
+                var minHeight = heightMap.MinHeight;
+                var maxHeight = heightMap.MaxHeight;
                 for (int r = 0; r < heightMap.Rows; r++)
                 {
-                    var minHeight = heightMap.MinHeight;
-                    var maxHeight = heightMap.MaxHeight;
                     for (int c = 0; c < heightMap.Columns; c++)
                     {
                         var height = heightMap[c, r];

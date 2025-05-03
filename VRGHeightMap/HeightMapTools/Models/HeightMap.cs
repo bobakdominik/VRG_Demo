@@ -8,6 +8,8 @@
         private readonly double _startX;
         private readonly double _startY;
         private readonly int[,] _heights;
+        private int _minHeight;
+        private int _maxHeight;
 
         public int Columns => _columns;
         public int Rows => _rows;
@@ -15,8 +17,8 @@
         public double X => _startX;
         public double Y => _startY;
 
-        public int MinHeight => GetMinHeight();
-        public int MaxHeight => GetMaxHeight();
+        public int MinHeight => _minHeight;
+        public int MaxHeight => _maxHeight;
 
         public int this[int col, int row]
         {
@@ -38,6 +40,8 @@
             _startX = startX;
             _startY = startY;
             _heights = new int[collumns,rows];
+            _minHeight = int.MaxValue;
+            _maxHeight = int.MinValue;
         }
 
         public void SetHeight(int height, int collumn, int row)
@@ -48,6 +52,7 @@
                 throw new ArgumentOutOfRangeException("Invalid collumn or row index");
             }
             _heights[collumn, row] = height;
+            UpdateMinMaxHeight(height);
         }
 
         public int GetHeight(int collumn, int row)
@@ -60,38 +65,16 @@
             return _heights[collumn, row];
         }
 
-        public int GetMaxHeight()
+        private void UpdateMinMaxHeight(int height)
         {
-            var maxHeight = int.MinValue;
-            for (int r = 0; r < _rows; r++)
+            if (height < _minHeight)
             {
-                for (int c = 0; c < _columns; c++)
-                {
-                    if (this[c, r] > maxHeight)
-                    {
-                        maxHeight = this[c, r];
-                    }
-                }
+                _minHeight = height;
             }
-            return maxHeight;
-        }
-
-        public int GetMinHeight()
-        {
-            var minHeight = int.MaxValue;
-            for (int r = 0; r < _rows; r++)
+            if (height > _maxHeight)
             {
-                for (int c = 0; c < _columns; c++)
-                {
-                    if (this[c, r] < minHeight)
-                    {
-                        minHeight = this[c, r];
-                    }
-                }
+                _maxHeight = height;
             }
-            return minHeight;
         }
-
-
     }
 }
