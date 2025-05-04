@@ -5,10 +5,10 @@
     <Compile Update="Views\CircleListingView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\MainView.xaml.cs">
+    <Compile Update="Views\HeightMapMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\MapView.xaml.cs">
+    <Compile Update="Views\MapImageView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

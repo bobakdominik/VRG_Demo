@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="HeightMapApp.Views.HeightMapMainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HeightMapApp.Views"
+             DataContext="{}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.IsSharedSizeScope="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
+                <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Celect Data"/>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Content="Add Circle"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <local:MapImageView Grid.Column="0" Margin="0 0 5 0"/>
+            <local:CircleListingView Grid.Column="1"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

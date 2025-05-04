@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace HeightMapApp.Views
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for HeightMapMainView.xaml
     /// </summary>
-    public partial class MainView : UserControl
+    public partial class HeightMapMainView : UserControl
     {
-        public MainView()
+        public HeightMapMainView()
         {
             InitializeComponent();
         }

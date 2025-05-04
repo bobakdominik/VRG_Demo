@@ -5,7 +5,7 @@ namespace HeightMapTools.Tools
 {
     public static class HeightMapImageGenerator
     {
-        public static int ImageCellSize = 1;
+        public static readonly int ImageCellSize = 1;
 
         public static Bitmap CreateBitMapFromHeightMap(HeightMap heightMap)
         {

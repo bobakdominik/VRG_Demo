@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HeightMapApp.ViewModels
 {
-    class CircleListingViewModel
+    class CircleListingViewModel : ViewModelBase
     {
     }
 }

@@ -18,9 +18,9 @@ namespace HeightMapApp.Views
     /// <summary>
     /// Interaction logic for MapView.xaml
     /// </summary>
-    public partial class MapView : UserControl
+    public partial class MapImageView : UserControl
     {
-        public MapView()
+        public MapImageView()
         {
             InitializeComponent();
         }

@@ -17,9 +17,9 @@ namespace HeightMapApp.Models
         {
             get
             {
-                var xLength = ;
-                var yLength = ;
-
+                var xLength = Math.Max(CenterPoint.XVal, OutlinePoint.XVal) - Math.Min(CenterPoint.XVal, OutlinePoint.XVal);
+                var yLength = Math.Max(CenterPoint.YVal, OutlinePoint.YVal) - Math.Min(CenterPoint.YVal, OutlinePoint.YVal);
+                return Math.Sqrt(Math.Pow(xLength, 2) + Math.Pow(yLength, 2));
             }
         }
     }
