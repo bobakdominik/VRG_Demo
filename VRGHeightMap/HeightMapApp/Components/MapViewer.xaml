@@ -13,8 +13,17 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Image Margin="1" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" MouseMove="OnMouseMove" Source="D://Development//c#//VRG_Demo//test.png" Stretch="Uniform" MaxHeight="800" MaxWidth="800"/>
+        <ScrollViewer Grid.Row="0" 
+                      HorizontalScrollBarVisibility="Auto" 
+                      VerticalScrollBarVisibility="Auto">
+            <Image Margin="1" 
+                   MouseEnter="OnMouseEnter" 
+                   MouseLeave="OnMouseLeave" 
+                   MouseMove="OnMouseMove" 
+                   Source="{Binding HeightMapImage}" 
+                   Stretch="Uniform" 
+                   MaxHeight="800" 
+                   MaxWidth="800"/>
         </ScrollViewer>
         <TextBlock Grid.Row="1" Text="{Binding CursorLocationText}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="10"/>
     </Grid>

@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HeightMapApp.Models;
+using HeightMapApp.ViewModels;
+using HeightMapTools.Tools;
 
 namespace HeightMapApp.Commands
 {
     internal class SelectDataCommand : CommandBase
     {
-        public SelectDataCommand()
+        private MapViewerViewModel _mapViewerViewModel;
+        public SelectDataCommand(MapViewerViewModel mapViewerViewModel)
         {
+            _mapViewerViewModel = mapViewerViewModel;
         }
 
         public override void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            var heightMap = HeightMapFileReader.ReadHeihtMapFromFile("D:\\Development\\c#\\VRG_Demo\\heightmap_ASCII");
+            var viewableHeightMap = new ViewableHeightMap(heightMap);
+            _mapViewerViewModel.SetHeightMap(viewableHeightMap);
         }
     }
 }

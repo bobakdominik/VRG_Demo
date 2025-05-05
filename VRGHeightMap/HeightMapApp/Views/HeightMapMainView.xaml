@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
                 <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Celect Data" Command="{Binding SelectDataCommand}"/>
+            <Button Grid.Column="0" Content="Select Data" Command="{Binding SelectDataCommand}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Content="Add Circle" Command="{Binding AddCircleCommand}"/>
         </Grid>
 

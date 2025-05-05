@@ -1,9 +1,6 @@
 ﻿using HeightMapApp.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HeightMapApp.Models;
+using HeightMapTools.Models;
 using System.Windows.Input;
 
 namespace HeightMapApp.ViewModels
@@ -17,9 +14,19 @@ namespace HeightMapApp.ViewModels
 
         public HeightMapMainViewModel()
         {
-            MapViewerViewModel = new MapViewerViewModel();
+            var demoHeightMap = new HeightMap(255, 255, 1, 0, 0);
+            for (int r = 0; r < demoHeightMap.Rows; r++)
+            {
+                for (int c = 0; c < demoHeightMap.Columns; c++)
+                {
+                    demoHeightMap[c, r] = c;
+                }
+            }
+            var demoViewableHeightMap = new ViewableHeightMap(demoHeightMap);
+
+            MapViewerViewModel = new MapViewerViewModel(demoViewableHeightMap);
             CircleListingViewModel = new CircleListingViewModel();
-            SelectDataCommand = new SelectDataCommand();
+            SelectDataCommand = new SelectDataCommand(MapViewerViewModel);
             AddCircleCommand = new AddCircleCommand();
         }
     }
