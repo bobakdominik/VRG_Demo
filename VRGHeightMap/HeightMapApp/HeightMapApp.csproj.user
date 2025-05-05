@@ -2,13 +2,13 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Views\CircleListingView.xaml.cs">
+    <Compile Update="Components\CircleListing.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\HeightMapMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\MapImageView.xaml.cs">
+    <Compile Update="Components\MapViewer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

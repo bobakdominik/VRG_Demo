@@ -3,19 +3,19 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace HeightMapApp.Views
+namespace HeightMapApp.Components
 {
     /// <summary>
     /// Interaction logic for MapView.xaml
     /// </summary>
-    public partial class MapImageView : UserControl
+    public partial class MapViewer : UserControl
     {
-        private MapImageViewModel ViewModel => (MapImageViewModel)DataContext;
+        private MapViewerViewModel ViewModel => (MapViewerViewModel)DataContext;
         private const int cDefaultImageSize = 1024;
-        public MapImageView()
+        public MapViewer()
         {
             InitializeComponent();
-            DataContext = new MapImageViewModel();
+            DataContext = new MapViewerViewModel();
         }
 
         private void OnMouseEnter(object sender, MouseEventArgs e)

@@ -1,9 +1,9 @@
 ﻿namespace HeightMapApp.ViewModels
 {
-    class MapImageViewModel : ViewModelBase
+    class MapViewerViewModel : ViewModelBase
     {
         private const string cDefaultCursorLocationText = "X: {0}, Y: {1}, Z: {2}";
-        private string _cursorLocationText;
+        private string _cursorLocationText = string.Empty;
 
         public string CursorLocationText
         {
@@ -18,9 +18,9 @@
             }
         }
 
-        public MapImageViewModel()
+        public MapViewerViewModel()
         {
-            _cursorLocationText = "";
+            ResetCursorPosition();
         }
 
 
