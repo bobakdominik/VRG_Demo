@@ -14,8 +14,8 @@
         public int Columns => _columns;
         public int Rows => _rows;
         public double CellSize => _cellSize;
-        public double X => _startX;
-        public double Y => _startY;
+        public double StartX => _startX;
+        public double StartY => _startY;
 
         public int MinHeight => _minHeight;
         public int MaxHeight => _maxHeight;

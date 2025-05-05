@@ -11,7 +11,6 @@ namespace HeightMapApp.Components
     public partial class MapViewer : UserControl
     {
         private MapViewerViewModel ViewModel => (MapViewerViewModel)DataContext;
-        private const int cDefaultImageSize = 1024;
 
         public MapViewer()
         {
@@ -21,7 +20,7 @@ namespace HeightMapApp.Components
         private void OnMouseEnter(object sender, MouseEventArgs e)
         {
             var normalizedCrsorPosition = NormalizeCursorPosition(e.GetPosition(this), (Image)sender);
-            ViewModel.UpdateCursorPosition((int)normalizedCrsorPosition.Y, (int)normalizedCrsorPosition.X);
+            ViewModel.UpdateCursorPosition(normalizedCrsorPosition.Y, normalizedCrsorPosition.X);
         }
 
         private void OnMouseLeave(object sender, MouseEventArgs e)
@@ -32,7 +31,7 @@ namespace HeightMapApp.Components
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
             var normalizedCrsorPosition = NormalizeCursorPosition(e.GetPosition(this), (Image)sender);
-            ViewModel.UpdateCursorPosition((int)normalizedCrsorPosition.Y, (int)normalizedCrsorPosition.X);
+            ViewModel.UpdateCursorPosition(normalizedCrsorPosition.Y, normalizedCrsorPosition.X);
         }
 
         private Point NormalizeCursorPosition(Point cursorPozition, Image image)
@@ -47,10 +46,9 @@ namespace HeightMapApp.Components
             }
             else
             {
-                var normalizedX = ((cursorPozition.X - imageStartPoint.X)/ imageWidth) * cDefaultImageSize;
+                var normalizedX = ((cursorPozition.X - imageStartPoint.X)/ imageWidth);
                 var normalizedY = ((cursorPozition.Y - imageStartPoint.Y)/ imageHeight);
-                var invertedNormalizedY = (1 - normalizedY) * cDefaultImageSize;
-                return new Point(normalizedX, invertedNormalizedY);
+                return new Point(normalizedX, normalizedY);
             }
         }
 

@@ -7,23 +7,23 @@ namespace HeightMapApp.ViewModels
     {
         private const string cDefaultCursorLocationText = "X: {0}, Y: {1}, Z: {2}";
         private string _cursorLocationText = string.Empty;
-        private ViewableHeightMap _heightMap;
+        private ViewableHeightMap _ViewableHeightMap;
 
-        public ViewableHeightMap HeightMap
+        public ViewableHeightMap ViewableHeightMap
         {
             get
             {
-                return _heightMap;
+                return _ViewableHeightMap;
             }
             private set
             {
-                _heightMap = value;
-                OnPropertyChanged(nameof(HeightMap));
+                _ViewableHeightMap = value;
+                OnPropertyChanged(nameof(ViewableHeightMap));
                 OnPropertyChanged(nameof(HeightMapImage));
             }
         }
 
-        public BitmapImage HeightMapImage => HeightMap.HeightMapImage;
+        public BitmapImage HeightMapImage => ViewableHeightMap.HeightMapImage;
 
 
         public string CursorLocationText
@@ -47,7 +47,7 @@ namespace HeightMapApp.ViewModels
 
         public void SetHeightMap(ViewableHeightMap heightMap)
         {
-            HeightMap = heightMap;
+            ViewableHeightMap = heightMap;
         }
 
         internal void ResetCursorPosition()
@@ -55,9 +55,18 @@ namespace HeightMapApp.ViewModels
             CursorLocationText = string.Format(cDefaultCursorLocationText, "?", "?", "?");
         }
 
-        internal void UpdateCursorPosition(int y, int x)
+        internal void UpdateCursorPosition(double relativeCursorY, double relativeCursorX)
         {
-            CursorLocationText = string.Format(cDefaultCursorLocationText, x, y, "?");
+            var normalizedX = (int)(relativeCursorX * ViewableHeightMap.HeightMap.Columns);
+            var normalizedY = (int)(relativeCursorY * ViewableHeightMap.HeightMap.Rows);
+
+            var invertedNormalizedY = (int)((1 - relativeCursorY) * ViewableHeightMap.HeightMap.Rows); //[0,0] index is bottom left corner
+
+            var currentX = (normalizedX * ViewableHeightMap.HeightMap.CellSize) + ViewableHeightMap.HeightMap.StartX;
+            var currentY = (invertedNormalizedY * ViewableHeightMap.HeightMap.CellSize) + ViewableHeightMap.HeightMap.StartY;
+            var currentHeight = ViewableHeightMap.HeightMap[normalizedX, normalizedY];
+
+            CursorLocationText = string.Format(cDefaultCursorLocationText, currentX, currentY, currentHeight);
         }
     }
 }
