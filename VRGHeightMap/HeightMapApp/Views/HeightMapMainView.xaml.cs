@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using HeightMapApp.ViewModels;
+using System.Windows.Controls;
 
 namespace HeightMapApp.Views
 {
@@ -10,6 +11,7 @@ namespace HeightMapApp.Views
         public HeightMapMainView()
         {
             InitializeComponent();
+            DataContext = new HeightMapMainViewModel();
         }
     }
 }

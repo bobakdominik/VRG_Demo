@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:components="clr-namespace:HeightMapApp.Components"
-             DataContext="{}"
+             xmlns:components="clr-namespace:HeightMapApp.Components" 
+             xmlns:viewmodels="clr-namespace:HeightMapApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:HeightMapMainViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -19,8 +20,8 @@
                 <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
                 <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Celect Data"/>
-            <Button Grid.Column="1" HorizontalAlignment="Left" Content="Add Circle"/>
+            <Button Grid.Column="0" Content="Celect Data" Command="{Binding SelectDataCommand}"/>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Content="Add Circle" Command="{Binding AddCircleCommand}"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="5">
@@ -29,8 +30,8 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <components:MapViewer Grid.Column="0" Margin="0 0 5 0"/>
-            <components:CircleListing Grid.Column="1"/>
+            <components:MapViewer Grid.Column="0" Margin="0 0 5 0" DataContext="{Binding MapViewerViewModel}"/>
+            <components:CircleListing Grid.Column="1" DataContext="{Binding CircleListingViewModel}"/>
         </Grid>
 
     </Grid>

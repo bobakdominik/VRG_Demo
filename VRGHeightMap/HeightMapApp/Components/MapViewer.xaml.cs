@@ -12,10 +12,10 @@ namespace HeightMapApp.Components
     {
         private MapViewerViewModel ViewModel => (MapViewerViewModel)DataContext;
         private const int cDefaultImageSize = 1024;
+
         public MapViewer()
         {
             InitializeComponent();
-            DataContext = new MapViewerViewModel();
         }
 
         private void OnMouseEnter(object sender, MouseEventArgs e)
