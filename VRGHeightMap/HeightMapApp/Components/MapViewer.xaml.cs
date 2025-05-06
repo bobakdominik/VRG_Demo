@@ -30,8 +30,8 @@ namespace HeightMapApp.Components
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            var normalizedCrsorPosition = NormalizeCursorPosition(e.GetPosition(this), (Image)sender);
-            ViewModel.UpdateCursorPosition(normalizedCrsorPosition.Y, normalizedCrsorPosition.X);
+            var normalizedCursorPosition = NormalizeCursorPosition(e.GetPosition(this), (Image)sender);
+            ViewModel.UpdateCursorPosition(normalizedCursorPosition.Y, normalizedCursorPosition.X);
         }
 
         private Point NormalizeCursorPosition(Point cursorPozition, Image image)
