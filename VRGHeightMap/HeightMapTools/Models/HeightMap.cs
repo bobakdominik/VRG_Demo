@@ -8,8 +8,6 @@
         private readonly double _startX;
         private readonly double _startY;
         private readonly int[,] _heights;
-        private int _minHeight;
-        private int _maxHeight;
 
         public int Columns => _columns;
         public int Rows => _rows;
@@ -17,8 +15,8 @@
         public double StartX => _startX;
         public double StartY => _startY;
 
-        public int MinHeight => _minHeight;
-        public int MaxHeight => _maxHeight;
+        public int MinHeight => _heights.Cast<int>().Min();
+        public int MaxHeight => _heights.Cast<int>().Max();
 
         public int this[int col, int row]
         {
@@ -32,49 +30,48 @@
             }
         }
 
-        public HeightMap(int collumns, int rows, double cellSize, double startX, double startY) 
+        public HeightMap()
         {
+            _columns = 1;
+            _rows = 1;
+            _cellSize = 0;
+            _startX = 0;
+            _startY = 0;
+            _heights = new int[_columns, _rows];
+        }
+
+        public HeightMap(int columns, int rows, double cellSize, double startX, double startY) 
+        {
+            if (columns <= 0 || rows <= 0)
+            {
+                throw new ArgumentOutOfRangeException("Collumns and rows must be greater than zero");
+            }
             _rows = rows;
-            _columns = collumns;
+            _columns = columns;
             _cellSize = cellSize;
             _startX = startX;
             _startY = startY;
-            _heights = new int[collumns,rows];
-            _minHeight = int.MaxValue;
-            _maxHeight = int.MinValue;
+            _heights = new int[_columns, _rows];
         }
 
-        public void SetHeight(int height, int collumn, int row)
+        public void SetHeight(int height, int column, int row)
         {
-            if (collumn < 0 || collumn >= _columns ||
+            if (column < 0 || column >= _columns ||
                    row < 0 || row >= _rows)
             {
                 throw new ArgumentOutOfRangeException("Invalid collumn or row index");
             }
-            _heights[collumn, row] = height;
-            UpdateMinMaxHeight(height);
+            _heights[column, row] = height;
         }
 
-        public int GetHeight(int collumn, int row)
+        public int GetHeight(int column, int row)
         {
-            if (collumn < 0 || collumn >= _columns ||
+            if (column < 0 || column >= _columns ||
                    row < 0 || row >= _rows)
             {
                 throw new ArgumentOutOfRangeException("Invalid collumn or row index");
             }
-            return _heights[collumn, row];
-        }
-
-        private void UpdateMinMaxHeight(int height)
-        {
-            if (height < _minHeight)
-            {
-                _minHeight = height;
-            }
-            if (height > _maxHeight)
-            {
-                _maxHeight = height;
-            }
+            return _heights[column, row];
         }
     }
 }

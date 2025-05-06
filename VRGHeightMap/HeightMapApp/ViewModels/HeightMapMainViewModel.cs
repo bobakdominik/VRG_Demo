@@ -14,17 +14,7 @@ namespace HeightMapApp.ViewModels
 
         public HeightMapMainViewModel()
         {
-            var demoHeightMap = new HeightMap(255, 255, 1, 0, 0);
-            for (int r = 0; r < demoHeightMap.Rows; r++)
-            {
-                for (int c = 0; c < demoHeightMap.Columns; c++)
-                {
-                    demoHeightMap[c, r] = c;
-                }
-            }
-            var demoViewableHeightMap = new ViewableHeightMap(demoHeightMap);
-
-            MapViewerViewModel = new MapViewerViewModel(demoViewableHeightMap);
+            MapViewerViewModel = new MapViewerViewModel();
             CircleListingViewModel = new CircleListingViewModel();
             SelectDataCommand = new SelectDataCommand(MapViewerViewModel);
             AddCircleCommand = new AddCircleCommand();

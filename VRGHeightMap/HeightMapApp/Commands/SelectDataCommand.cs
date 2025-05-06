@@ -1,6 +1,8 @@
 ﻿using HeightMapApp.Models;
 using HeightMapApp.ViewModels;
 using HeightMapTools.Tools;
+using Microsoft.Win32;
+using System.Windows;
 
 namespace HeightMapApp.Commands
 {
@@ -14,9 +16,41 @@ namespace HeightMapApp.Commands
 
         public override void Execute(object? parameter)
         {
-            var heightMap = HeightMapFileReader.ReadHeihtMapFromFile("D:\\Development\\c#\\VRG_Demo\\heightmap_ASCII");
-            var viewableHeightMap = new ViewableHeightMap(heightMap);
-            _mapViewerViewModel.SetHeightMap(viewableHeightMap);
+            var filePath = GetFilePathFromDialog();
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return;
+            }
+            try
+            {
+                var heightMap = HeightMapFileReader.ReadHeihtMapFromFile(filePath);
+                var viewableHeightMap = new ViewableHeightMap(heightMap);
+                _mapViewerViewModel.SetHeightMap(viewableHeightMap);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorMessage($"Error reading height map file: {filePath}");
+            }
+        }
+
+        private string GetFilePathFromDialog()
+        {
+            var openFileDialog = new OpenFileDialog()
+            {
+                Title = "Select a Height Map File",
+                InitialDirectory = "C:\\",
+                Multiselect = false
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                return openFileDialog.FileName;
+            }
+            return string.Empty;
+        }
+
+        private void DisplayErrorMessage(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

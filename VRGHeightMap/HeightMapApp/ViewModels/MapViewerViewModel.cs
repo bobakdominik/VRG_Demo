@@ -7,9 +7,9 @@ namespace HeightMapApp.ViewModels
     {
         private const string cDefaultCursorLocationText = "X: {0}, Y: {1}, Z: {2}";
         private string _cursorLocationText = string.Empty;
-        private ViewableHeightMap _ViewableHeightMap;
+        private ViewableHeightMap? _ViewableHeightMap;
 
-        public ViewableHeightMap ViewableHeightMap
+        public ViewableHeightMap? ViewableHeightMap
         {
             get
             {
@@ -23,7 +23,7 @@ namespace HeightMapApp.ViewModels
             }
         }
 
-        public BitmapImage HeightMapImage => ViewableHeightMap.HeightMapImage;
+        public BitmapImage? HeightMapImage => ViewableHeightMap?.HeightMapImage;
 
 
         public string CursorLocationText
@@ -39,10 +39,10 @@ namespace HeightMapApp.ViewModels
             }
         }
 
-        public MapViewerViewModel(ViewableHeightMap heightMap)
+        public MapViewerViewModel()
         {
             ResetCursorPosition();
-            SetHeightMap(heightMap);
+            ViewableHeightMap = null;
         }
 
         public void SetHeightMap(ViewableHeightMap heightMap)
