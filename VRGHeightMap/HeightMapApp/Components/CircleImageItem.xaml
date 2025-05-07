@@ -8,7 +8,87 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:CircleImageItemViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Canvas x:Name="CircleCanvas" Height="{Binding CanvasHeight}" Width="{Binding CanvasWidth}" Background="Transparent">
-        
-    </Canvas>
+    <Grid x:Name="CircleItemGrid">
+        <Canvas x:Name="CircleCanvas" Background="Transparent">
+            <Canvas.Clip>
+                <RectangleGeometry>
+                    <RectangleGeometry.Rect>
+                        <Rect X="0" Y="0" Width="800" Height="800"/>
+                    </RectangleGeometry.Rect>
+                </RectangleGeometry>
+            </Canvas.Clip>
+            <Line 
+            X1="0"
+            Y1="0"
+            X2="5"
+            Y2="5"
+            Stroke="Orange"
+            StrokeThickness="1"/>
+            <Line 
+            X1="5"
+            Y1="0"
+            X2="0"
+            Y2="5"
+            Stroke="Orange"
+            StrokeThickness="1"/>
+
+            <Line 
+            X1="800"
+            Y1="800"
+            X2="794"
+            Y2="794"
+            Stroke="Orange"
+            StrokeThickness="1"/>
+            <Line 
+            X1="794"
+            Y1="800"
+            X2="800"
+            Y2="794"
+            Stroke="Orange"
+            StrokeThickness="1"/>
+
+            <Ellipse
+            Width="100"
+            Height="100"
+            Fill="Transparent"
+            Stroke="Red"
+            StrokeThickness="1"
+            Canvas.Left="50"
+            Canvas.Top="50" />
+
+            <Ellipse
+            Width="100"
+            Height="100"
+            Fill="Transparent"
+            Stroke="Red"
+            StrokeThickness="1"
+            Canvas.Left="-50"
+            Canvas.Top="-50" />
+
+            <Ellipse
+            Width="100"
+            Height="100"
+            Fill="Transparent"
+            Stroke="Red"
+            StrokeThickness="1"
+            Canvas.Left="750"
+            Canvas.Top="750" />
+
+            <Line 
+            X1="95"
+            Y1="95"
+            X2="105"
+            Y2="105"
+            Stroke="Blue"
+            StrokeThickness="1"/>
+            <Line 
+            X1="105"
+            Y1="95"
+            X2="95"
+            Y2="105"
+            Stroke="Blue"
+            StrokeThickness="1"/>
+
+        </Canvas>
+    </Grid>
 </UserControl>

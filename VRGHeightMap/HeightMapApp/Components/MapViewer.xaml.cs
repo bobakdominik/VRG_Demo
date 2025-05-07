@@ -19,7 +19,7 @@ namespace HeightMapApp.Components
 
         private void OnMouseEnter(object sender, MouseEventArgs e)
         {
-            var normalizedCrsorPosition = NormalizeCursorPosition(e.GetPosition(this), (Image)sender);
+            var normalizedCrsorPosition = NormalizeCursorPosition(e.GetPosition(this), (Grid)sender);
             ViewModel.UpdateCursorPosition(normalizedCrsorPosition.Y, normalizedCrsorPosition.X);
         }
 
@@ -30,15 +30,15 @@ namespace HeightMapApp.Components
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            var normalizedCursorPosition = NormalizeCursorPosition(e.GetPosition(this), (Image)sender);
+            var normalizedCursorPosition = NormalizeCursorPosition(e.GetPosition(this), (Grid)sender);
             ViewModel.UpdateCursorPosition(normalizedCursorPosition.Y, normalizedCursorPosition.X);
         }
 
-        private Point NormalizeCursorPosition(Point cursorPozition, Image image)
+        private Point NormalizeCursorPosition(Point cursorPozition, Grid grid)
         {
-            var imageHeight = image.ActualHeight;
-            var imageWidth = image.ActualWidth;
-            var imageStartPoint = GetImageStartingPoint(image);
+            var imageHeight = grid.ActualHeight;
+            var imageWidth = grid.ActualWidth;
+            var imageStartPoint = GetImageStartingPoint(grid);
 
             if (imageHeight == 0 || imageWidth == 0)
             {
@@ -52,9 +52,9 @@ namespace HeightMapApp.Components
             }
         }
 
-        private Point GetImageStartingPoint(Image image)
+        private Point GetImageStartingPoint(Grid grid)
         {
-            return image.TranslatePoint(new Point(0, 0), this);
+            return grid.TranslatePoint(new Point(0, 0), this);
         }
     }
 }
