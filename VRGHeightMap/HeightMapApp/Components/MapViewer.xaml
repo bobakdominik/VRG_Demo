@@ -30,9 +30,92 @@
                         Source="{Binding HeightMapImage}"
                         Stretch="Uniform"/>
 
-                <local:CircleImageItem 
+                <!--<local:CircleImageItem 
                         Height="{Binding ActualHeight, ElementName=MapImage}"
-                        Width="{Binding ActualWidth, ElementName=MapImage}"/>
+                        Width="{Binding ActualWidth, ElementName=MapImage}"/>-->
+
+
+                <Canvas x:Name="CircleCanvas" 
+                        Background="Transparent"  
+                        Height="{Binding ActualHeight, ElementName=MapImage}"
+                        Width="{Binding ActualWidth, ElementName=MapImage}">
+                    <Canvas.Clip>
+                        <RectangleGeometry>
+                            <RectangleGeometry.Rect>
+                                <Rect X="0" Y="0" Width="800" Height="800"/>
+                            </RectangleGeometry.Rect>
+                        </RectangleGeometry>
+                    </Canvas.Clip>
+                    <local:CircleImageItem Height="{Binding ActualHeight, ElementName=CircleCanvas}"
+                                           Width="{Binding ActualWidth, ElementName=CircleCanvas}"
+                                           DataContext="{Binding TestCircleViewModel}"/>
+                    <!--<Border BorderThickness="5" BorderBrush="Green">
+                        <Canvas>
+                            --><!-- Circle -->
+                            <!--<Ellipse
+                                Width="{Binding TestCircleViewModel.CircleDiameter}"
+                                Height="{Binding TestCircleViewModel.CircleDiameter}"
+                                Fill="Transparent"
+                                Stroke="{Binding TestCircleViewModel.CircleColor}"
+                                StrokeThickness="{Binding TestCircleViewModel.Thickness}"
+                                Canvas.Left="{Binding TestCircleViewModel.CircleX}"
+                                Canvas.Top="{Binding TestCircleViewModel.CircleY}" />-->
+
+                            <!-- Center Point--><!--
+                            <Line 
+                                X1="-2.5"
+                                Y1="-2.5"
+                                X2="2.5"
+                                Y2="2.5"
+                                Stroke="Red"
+                                StrokeThickness="1"/>-->
+                            <!--<Line 
+                                X1="{Binding TestCircleViewModel.CenterCrossX1}"
+                                Y1="{Binding TestCircleViewModel.CenterCrossY1}"
+                                X2="{Binding TestCircleViewModel.CenterCrossX2}"
+                                Y2="{Binding TestCircleViewModel.CenterCrossY2}"
+                                Stroke="{Binding TestCircleViewModel.CircleColor}"
+                                StrokeThickness="1"/>-->
+                            <!--<Line
+                                X1="{Binding TestCircleViewModel.CenterCrossX2}"
+                                Y1="{Binding TestCircleViewModel.CenterCrossY1}"
+                                X2="{Binding TestCircleViewModel.CenterCrossX1}"
+                                Y2="{Binding TestCircleViewModel.CenterCrossY2}"
+                                Stroke="{Binding TestCircleViewModel.CircleColor}"
+                                StrokeThickness="1"/>-->
+
+                            <!-- Outline Point -->
+                            <!--<Line 
+                                X1="{Binding TestCircleViewModel.OutlineCrossX1}"
+                                Y1="{Binding TestCircleViewModel.OutlineCrossY1}"
+                                X2="{Binding TestCircleViewModel.OutlineCrossX2}"
+                                Y2="{Binding TestCircleViewModel.OutlineCrossY2}"
+                                Stroke="{Binding TestCircleViewModel.CircleColor}"
+                                StrokeThickness="1"/>
+                            <Line
+                                X1="{Binding TestCircleViewModel.OutlineCrossX2}"
+                                Y1="{Binding TestCircleViewModel.OutlineCrossY1}"
+                                X2="{Binding TestCircleViewModel.OutlineCrossX1}"
+                                Y2="{Binding TestCircleViewModel.OutlineCrossY2}"
+                                Stroke="{Binding TestCircleViewModel.CircleColor}"
+                                StrokeThickness="1"/>-->
+                        <!--</Canvas>
+                    </Border>-->
+                    
+                    <!--<ItemsControl ItemsSource="{Binding CircleViewModels}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:CircleImageItem/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Canvas.Left" Value="{Binding CenterPointForView.X}" />
+                                <Setter Property="Canvas.Top" Value="{Binding CenterPointForView.Y}" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                    </ItemsControl>-->
+                </Canvas>
             </Grid>
         </ScrollViewer>
 

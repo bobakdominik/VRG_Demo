@@ -8,7 +8,66 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:CircleImageItemViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="CircleItemGrid">
+    <Border BorderThickness="2" BorderBrush="Orange">
+        <Canvas>
+            <Line 
+    X1="2.5"
+    Y1="-2.5"
+    X2="7.5"
+    Y2="2.5"
+    Stroke="Red"
+    StrokeThickness="3"/>
+            <Line 
+X1="7.5"
+Y1="0"
+X2="10"
+Y2="2.5"
+Stroke="Blue"
+StrokeThickness="1"/>
+            <!-- Circle -->
+            <Ellipse
+            Width="{Binding CircleDiameter, PresentationTraceSources.TraceLevel=High}"
+            Height="{Binding CircleDiameter, PresentationTraceSources.TraceLevel=High}"
+            Fill="Transparent"
+            Stroke="{Binding CircleColor, PresentationTraceSources.TraceLevel=High}"
+            StrokeThickness="{Binding Thickness, PresentationTraceSources.TraceLevel=High}"
+            Canvas.Left="{Binding CircleX, PresentationTraceSources.TraceLevel=High}"
+            Canvas.Top="{Binding CircleY, PresentationTraceSources.TraceLevel=High}" />
+
+            <!-- Center Point-->
+            <Line 
+            X1="{Binding CenterCrossX1}"
+            Y1="{Binding CenterCrossY1}"
+            X2="{Binding CenterCrossX2}"
+            Y2="{Binding CenterCrossY2}"
+            Stroke="{Binding CircleColor}"
+            StrokeThickness="1"/>
+            <Line
+            X1="{Binding CenterCrossX2}"
+            Y1="{Binding CenterCrossY1}"
+            X2="{Binding CenterCrossX1}"
+            Y2="{Binding CenterCrossY2}"
+            Stroke="{Binding CircleColor}"
+            StrokeThickness="1"/>
+
+            <!-- Outline Point -->
+            <Line 
+            X1="{Binding OutlineCrossX1}"
+            Y1="{Binding OutlineCrossY1}"
+            X2="{Binding OutlineCrossX2}"
+            Y2="{Binding OutlineCrossY2}"
+            Stroke="{Binding CircleColor}"
+            StrokeThickness="1"/>
+            <Line
+            X1="{Binding OutlineCrossX2}"
+            Y1="{Binding OutlineCrossY1}"
+            X2="{Binding OutlineCrossX1}"
+            Y2="{Binding OutlineCrossY2}"
+            Stroke="{Binding CircleColor}"
+            StrokeThickness="1"/>
+        </Canvas>
+    </Border>
+    <!--<Grid x:Name="CircleItemGrid">
         <Canvas x:Name="CircleCanvas" Background="Transparent">
             <Canvas.Clip>
                 <RectangleGeometry>
@@ -87,8 +146,8 @@
             X2="95"
             Y2="105"
             Stroke="Blue"
-            StrokeThickness="1"/>
+            StrokeThickness="1"/>-->
 
-        </Canvas>
-    </Grid>
+        <!--</Canvas>-->
+    <!--</Grid>-->
 </UserControl>

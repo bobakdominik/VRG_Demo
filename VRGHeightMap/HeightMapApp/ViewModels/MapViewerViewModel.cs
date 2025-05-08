@@ -1,13 +1,32 @@
 ﻿using HeightMapApp.Models;
+using System.Collections.ObjectModel;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace HeightMapApp.ViewModels
 {
     class MapViewerViewModel : ViewModelBase
     {
+        private readonly ObservableCollection<CircleImageItemViewModel> _circleViewModels;
+        private CircleImageItemViewModel _testCircleViewModel;
+        public CircleImageItemViewModel TestCircleViewModel
+        {
+            get
+            {
+                return _testCircleViewModel;
+            }
+            private set
+            {
+                _testCircleViewModel = value;
+                OnPropertyChanged(nameof(TestCircleViewModel));
+            }
+        }
+
         private const string cDefaultCursorLocationText = "X: {0}, Y: {1}, Z: {2}";
         private string _cursorLocationText = string.Empty;
         private ViewableHeightMap? _ViewableHeightMap;
+
+        public IEnumerable<CircleImageItemViewModel> CircleViewModels => _circleViewModels;
 
         public ViewableHeightMap? ViewableHeightMap
         {
@@ -25,7 +44,6 @@ namespace HeightMapApp.ViewModels
 
         public BitmapImage? HeightMapImage => ViewableHeightMap?.HeightMapImage;
 
-
         public string CursorLocationText
         {
             get
@@ -41,6 +59,14 @@ namespace HeightMapApp.ViewModels
 
         public MapViewerViewModel()
         {
+            TestCircleViewModel = new CircleImageItemViewModel(new TwoPointCircle(new HeightMapPoint(10, 10, 10, 10), new HeightMapPoint(40, 40, 40, 40), Colors.Red));
+            //_circleViewModels = new ObservableCollection<CircleImageItemViewModel>()
+            //{
+            //    new CircleImageItemViewModel(new TwoPointCircle(new HeightMapPoint(1023, 0, 0, 0), new HeightMapPoint(1013, 10, 10, 10), Colors.Red)),
+            //    new CircleImageItemViewModel(new TwoPointCircle(new HeightMapPoint(1023, 1023, 800, 800), new HeightMapPoint(973, 973, 750, 750), Colors.Blue))
+            //};
+
+
             ResetCursorPosition();
             ViewableHeightMap = null;
         }

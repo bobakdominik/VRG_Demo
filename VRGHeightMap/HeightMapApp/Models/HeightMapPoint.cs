@@ -2,23 +2,22 @@
 {
     internal class HeightMapPoint
     {
-        private readonly int _parentWidth;
-        private readonly int _parentHeight;
-        private readonly double _relativeX;
-        private readonly double _relativeY;
+        private readonly double _mapX;
+        private readonly double _mapY;
+        private readonly double _viewX;
+        private readonly double _viewY;
 
-        public int X => (int)(_relativeX * _parentWidth);
-        public int Y => (int)(_relativeY * _parentHeight);
+        public double MapX => _mapX;
+        public double MapY => _mapY;
+        public double ViewX => _viewX;
+        public double ViewY => _viewY;
 
-        public int XDisplay => X;
-        public int YDisplay => (int)((1 - _relativeY) * _parentHeight);
-
-        public HeightMapPoint(double relativeX, double relativeY, int parentWidth, int parentHeight)
+        public HeightMapPoint(double mapY, double mapX, int viewY, int viewX)
         {
-            _relativeX = relativeX;
-            _relativeY = relativeY;
-            _parentWidth = parentWidth;
-            _parentHeight = parentHeight;
+            _mapX = mapX;
+            _mapY = mapY;
+            _viewX = viewX;
+            _viewY = viewY;
         }
     }
 }
