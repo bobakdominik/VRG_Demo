@@ -1,16 +1,34 @@
-﻿using System.Windows.Media;
+﻿using System.ComponentModel;
+using System.Windows.Media;
 
 namespace HeightMapApp.Models
 {
-    class TwoPointCircle
+    class TwoPointCircle : INotifyPropertyChanged
     {
         private readonly HeightMapPoint _centerPoint;
         private readonly HeightMapPoint _outlinePoint;
         private readonly Brush _brush;
+        private readonly string _name;
+        private bool _visible;
 
+        public string Name => _name;
         public HeightMapPoint CenterPoint => _centerPoint;
         public HeightMapPoint OutlinePoint => _outlinePoint;
         public Brush Brush => _brush;
+        public bool Visible
+        {
+            get
+            {
+                return _visible;
+            }
+            set
+            {
+                _visible = value;
+                OnPropertyChanged(nameof(Visible));
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public double RadiusForView
         {
@@ -32,12 +50,18 @@ namespace HeightMapApp.Models
             }
         }
         
-        public TwoPointCircle(HeightMapPoint centerPoint, HeightMapPoint outlinePoint, Brush brush)
+        public TwoPointCircle(string name, HeightMapPoint centerPoint, HeightMapPoint outlinePoint, Brush brush)
         {
+            _name = name;
             _centerPoint = centerPoint;
             _outlinePoint = outlinePoint;
             _brush = brush;
+            _visible = true;
         }
-        
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

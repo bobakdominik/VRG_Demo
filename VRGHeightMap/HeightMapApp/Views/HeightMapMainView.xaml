@@ -19,8 +19,8 @@
                 <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
                 <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Select Data" Command="{Binding SelectDataCommand}"/>
-            <Button Grid.Column="1" HorizontalAlignment="Left" Content="Add Circle" Command="{Binding AddCircleCommand}"/>
+            <Button Style="{StaticResource MainButtonStyle}" Grid.Column="0" Content="Select Data" Command="{Binding SelectDataCommand}"/>
+            <Button Style="{StaticResource MainButtonStyle}" Grid.Column="1" HorizontalAlignment="Left" Content="Add Circle" Command="{Binding AddCircleCommand}"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="5">

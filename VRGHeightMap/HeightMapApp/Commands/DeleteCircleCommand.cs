@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HeightMapApp.Models;
+using HeightMapApp.Services;
 
 namespace HeightMapApp.Commands
 {
     internal class DeleteCircleCommand : CommandBase
     {
-        public DeleteCircleCommand()
+        private readonly CircleRepository _circleRepository;
+
+        public DeleteCircleCommand(CircleRepository circleRepository)
         {
+            _circleRepository = circleRepository;
         }
 
         public override void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            var circle = parameter as TwoPointCircle;
+            if (circle != null)
+            {
+                _circleRepository.RemoveCircle(circle);
+            }
         }
     }
 }

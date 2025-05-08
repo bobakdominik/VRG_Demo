@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\DeleteButtonImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\DeleteButtonImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HeightMapTools\HeightMapTools.csproj" />
   </ItemGroup>
 
