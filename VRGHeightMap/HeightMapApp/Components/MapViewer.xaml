@@ -30,9 +30,31 @@
                         Source="{Binding HeightMapImage}"
                         Stretch="Uniform"/>
 
-                <local:CircleImageItem 
+                <Canvas x:Name="CircleCanvas" 
+                        Background="Transparent"  
                         Height="{Binding ActualHeight, ElementName=MapImage}"
-                        Width="{Binding ActualWidth, ElementName=MapImage}"/>
+                        Width="{Binding ActualWidth, ElementName=MapImage}">
+                    <Canvas.Clip>
+                        <RectangleGeometry>
+                            <RectangleGeometry.Rect>
+                                <Rect X="0" Y="0" Width="800" Height="800"/>
+                            </RectangleGeometry.Rect>
+                        </RectangleGeometry>
+                    </Canvas.Clip>
+
+                    <ItemsControl ItemsSource="{Binding CircleViewModels}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:CircleImageItem/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Canvas>
             </Grid>
         </ScrollViewer>
 
