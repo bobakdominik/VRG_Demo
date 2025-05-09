@@ -2,18 +2,18 @@
 
 namespace HeightMapApp.Commands
 {
-    internal class AddCircleCommand : CommandBase
+    internal class CancelCircleCreationCommand : CommandBase
     {
         private readonly CircleCreator _circleCreator;
 
-        public AddCircleCommand(CircleCreator circleCreator)
+        public CancelCircleCreationCommand(CircleCreator circleCreator)
         {
-            this._circleCreator = circleCreator;
+            _circleCreator = circleCreator;
         }
 
         public override void Execute(object? parameter)
         {
-            _circleCreator.StartCircleCreation();
+            _circleCreator.ResetCircleCreation();
         }
     }
 }

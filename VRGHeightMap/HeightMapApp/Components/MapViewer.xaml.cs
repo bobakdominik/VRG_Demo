@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace HeightMapApp.Components
 {
@@ -17,21 +18,36 @@ namespace HeightMapApp.Components
             InitializeComponent();
         }
 
-        private void OnMouseEnter(object sender, MouseEventArgs e)
+        private void ImageGrid_OnMouseEnter(object sender, MouseEventArgs e)
         {
-            var normalizedCrsorPosition = NormalizeCursorPosition(e.GetPosition(this), (Grid)sender);
-            ViewModel.UpdateCursorPosition(normalizedCrsorPosition.Y, normalizedCrsorPosition.X);
+            var grid = (Grid)sender;
+            var normalizedCrsorPosition = NormalizeCursorPosition(e.GetPosition(this), grid);
+            ViewModel.UpdateCursorPosition(normalizedCrsorPosition.Y, normalizedCrsorPosition.X, grid.ActualHeight, grid.ActualWidth);
         }
 
-        private void OnMouseLeave(object sender, MouseEventArgs e)
+        private void ImageGrid_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            var grid = (Grid)sender;
+            var normalizedCursorPosition = NormalizeCursorPosition(e.GetPosition(this), grid);
+            ViewModel.UpdateCursorPosition(normalizedCursorPosition.Y, normalizedCursorPosition.X, grid.ActualHeight, grid.ActualWidth);
+        }
+
+        private void ImageGrid_OnMouseLeave(object sender, MouseEventArgs e)
         {
             ViewModel.ResetCursorPosition();
         }
-
-        private void OnMouseMove(object sender, MouseEventArgs e)
+        private void ImageGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var normalizedCursorPosition = NormalizeCursorPosition(e.GetPosition(this), (Grid)sender);
-            ViewModel.UpdateCursorPosition(normalizedCursorPosition.Y, normalizedCursorPosition.X);
+            ViewModel.SaveCursorPosition();
+        }
+
+        private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var canvas = (Canvas)sender;
+            canvas.Clip = new RectangleGeometry
+            {
+                Rect = new Rect(0, 0, canvas.ActualWidth, canvas.ActualHeight)
+            };
         }
 
         private Point NormalizeCursorPosition(Point cursorPozition, Grid grid)

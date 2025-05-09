@@ -13,18 +13,23 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        
         <ScrollViewer Grid.Row="0" 
                           HorizontalScrollBarVisibility="Auto" 
                           VerticalScrollBarVisibility="Auto">
+            
             <Grid x:Name="ImageGrid"
                     Margin="1" 
-                    MouseEnter="OnMouseEnter" 
-                    MouseLeave="OnMouseLeave" 
-                    MouseMove="OnMouseMove"
+                    Cursor="{Binding OnMapCursor}"
+                    MouseEnter="ImageGrid_OnMouseEnter" 
+                    MouseLeave="ImageGrid_OnMouseLeave" 
+                    MouseMove="ImageGrid_OnMouseMove"
+                    MouseLeftButtonDown="ImageGrid_MouseLeftButtonDown"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     MaxHeight="800"
                     MaxWidth="800">
+                
                 <Image 
                         x:Name="MapImage" 
                         Source="{Binding HeightMapImage}"
@@ -33,14 +38,8 @@
                 <Canvas x:Name="CircleCanvas" 
                         Background="Transparent"  
                         Height="{Binding ActualHeight, ElementName=MapImage}"
-                        Width="{Binding ActualWidth, ElementName=MapImage}">
-                    <Canvas.Clip>
-                        <RectangleGeometry>
-                            <RectangleGeometry.Rect>
-                                <Rect X="0" Y="0" Width="800" Height="800"/>
-                            </RectangleGeometry.Rect>
-                        </RectangleGeometry>
-                    </Canvas.Clip>
+                        Width="{Binding ActualWidth, ElementName=MapImage}"
+                        SizeChanged="Canvas_SizeChanged">
 
                     <ItemsControl ItemsSource="{Binding CircleViewModels}">
                         <ItemsControl.ItemTemplate>
@@ -54,6 +53,12 @@
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
+
+                    <local:CircleImageItem 
+                        Height="{Binding ActualHeight, ElementName=CircleCanvas}"
+                        Width="{Binding ActualWidth, ElementName=CircleCanvas}" 
+                        DataContext="{Binding CreatedCircle}"/>
+
                 </Canvas>
             </Grid>
         </ScrollViewer>

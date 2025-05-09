@@ -18,19 +18,42 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
                 <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
+                <ColumnDefinition Width="auto" SharedSizeGroup="button"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource MainButtonStyle}" Grid.Column="0" Content="Select Data" Command="{Binding SelectDataCommand}"/>
-            <Button Style="{StaticResource MainButtonStyle}" Grid.Column="1" HorizontalAlignment="Left" Content="Add Circle" Command="{Binding AddCircleCommand}"/>
+            
+            <Button Style="{StaticResource MainButtonStyle}" 
+                    Grid.Column="0" 
+                    Content="Select Data"
+                    Command="{Binding SelectDataCommand}"
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"/>
+            
+            <Button Style="{StaticResource MainButtonStyle}" 
+                    Grid.Column="1" Content="Add Circle" 
+                    Command="{Binding AddCircleCommand}"
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"/>
+            
+            <Button Style="{StaticResource MainButtonStyle}" 
+                    Grid.Column="2"
+                    Content="Cancel"
+                    Command="{Binding CancelCircleCreationCommand}" 
+                    Visibility="{Binding CancelButtonVisibility}" 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
         </Grid>
+        
+        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black" Margin="1">
+            <Grid  Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1" Margin="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <components:MapViewer Grid.Column="0" Margin="0 0 5 0" DataContext="{Binding MapViewerViewModel}"/>
-            <components:CircleListing Grid.Column="1" DataContext="{Binding CircleListingViewModel}"/>
-        </Grid>
+                <components:MapViewer Grid.Column="0" Margin="0 0 5 0" DataContext="{Binding MapViewerViewModel}"/>
+            
+                <components:CircleListing Grid.Column="1" DataContext="{Binding CircleListingViewModel}"/>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

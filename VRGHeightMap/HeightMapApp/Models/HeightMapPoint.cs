@@ -61,7 +61,7 @@ namespace HeightMapApp.Models
             }
         }
 
-        public HeightMapPoint(double mapY, double mapX, int viewY, int viewX)
+        public HeightMapPoint(double mapY, double mapX, double viewY, double viewX)
         {
             _mapX = mapX;
             _mapY = mapY;

@@ -48,5 +48,12 @@ namespace HeightMapApp.Services
                 }
             }
         }
+
+        public void Clear()
+        {
+            _circles.Clear();
+            _circleImageItemViewModels.Clear();
+            _circleListingItemViewModels.Clear();
+        }
     }
 }

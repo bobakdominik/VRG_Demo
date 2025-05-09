@@ -8,28 +8,26 @@ namespace HeightMapApp.ViewModels
     class CircleImageItemViewModel : ViewModelBase
     {
         private readonly TwoPointCircle _selectedCircle;
-        private readonly Point _centerPoint;
-        private readonly Point _outlinePoint;
         private const double CHalfLineLength = 2.5;
 
         public TwoPointCircle TwoPointCircle => _selectedCircle;
 
-        public double CircleX => _centerPoint.X - CircleRadius;
-        public double CircleY => _centerPoint.Y - CircleRadius;
+        public double CircleX => _selectedCircle.CenterPoint.ViewX - CircleRadius;
+        public double CircleY => _selectedCircle.CenterPoint.ViewY - CircleRadius;
         public Brush Brush => _selectedCircle.Brush;
         public double CircleRadius => _selectedCircle.RadiusForView;
         public double CircleDiameter => CircleRadius * 2;
         public int Thickness => 1;
 
-        public double CenterCrossX1 => _centerPoint.X - CHalfLineLength;
-        public double CenterCrossY1 => _centerPoint.Y - CHalfLineLength;
-        public double CenterCrossX2 => _centerPoint.X + CHalfLineLength;
-        public double CenterCrossY2 => _centerPoint.Y + CHalfLineLength;
+        public double CenterCrossX1 => _selectedCircle.CenterPoint.ViewX - CHalfLineLength;
+        public double CenterCrossY1 => _selectedCircle.CenterPoint.ViewY - CHalfLineLength;
+        public double CenterCrossX2 => _selectedCircle.CenterPoint.ViewX + CHalfLineLength;
+        public double CenterCrossY2 => _selectedCircle.CenterPoint.ViewY + CHalfLineLength;
 
-        public double OutlineCrossX1 => _outlinePoint.X - CHalfLineLength;
-        public double OutlineCrossY1 => _outlinePoint.Y - CHalfLineLength;
-        public double OutlineCrossX2 => _outlinePoint.X + CHalfLineLength;
-        public double OutlineCrossY2 => _outlinePoint.Y + CHalfLineLength;
+        public double OutlineCrossX1 => _selectedCircle.OutlinePoint.ViewX - CHalfLineLength;
+        public double OutlineCrossY1 => _selectedCircle.OutlinePoint.ViewY - CHalfLineLength;
+        public double OutlineCrossX2 => _selectedCircle.OutlinePoint.ViewX + CHalfLineLength;
+        public double OutlineCrossY2 => _selectedCircle.OutlinePoint.ViewY + CHalfLineLength;
 
         public Visibility IsVisible => _selectedCircle.Visible ? Visibility.Visible : Visibility.Hidden;
 
@@ -37,9 +35,36 @@ namespace HeightMapApp.ViewModels
         public CircleImageItemViewModel(TwoPointCircle twoPointCircle)
         {
             _selectedCircle = twoPointCircle;
-            _centerPoint = new Point(twoPointCircle.CenterPoint.ViewX, twoPointCircle.CenterPoint.ViewY);
-            _outlinePoint = new Point(twoPointCircle.OutlinePoint.ViewX, twoPointCircle.OutlinePoint.ViewY);
+
             _selectedCircle.PropertyChanged += SelectedCircle_VisibilityChanged;
+            _selectedCircle.CenterPoint.PropertyChanged += CenterPoint_PropertyChanged;
+            _selectedCircle.OutlinePoint.PropertyChanged += OutlinePoint_PropertyChanged;
+        }
+
+        private void CenterPoint_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(CircleX));
+            OnPropertyChanged(nameof(CircleY));
+            OnPropertyChanged(nameof(CircleRadius));
+            OnPropertyChanged(nameof(CircleDiameter));
+
+            OnPropertyChanged(nameof(CenterCrossX1));
+            OnPropertyChanged(nameof(CenterCrossY1));
+            OnPropertyChanged(nameof(CenterCrossX2));
+            OnPropertyChanged(nameof(CenterCrossY2));
+        }
+
+        private void OutlinePoint_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(CircleX));
+            OnPropertyChanged(nameof(CircleY));
+            OnPropertyChanged(nameof(CircleRadius));
+            OnPropertyChanged(nameof(CircleDiameter));
+
+            OnPropertyChanged(nameof(OutlineCrossX1));
+            OnPropertyChanged(nameof(OutlineCrossY1));
+            OnPropertyChanged(nameof(OutlineCrossX2));
+            OnPropertyChanged(nameof(OutlineCrossY2));
         }
 
         private void SelectedCircle_VisibilityChanged(object? sender, PropertyChangedEventArgs e)
@@ -53,6 +78,8 @@ namespace HeightMapApp.ViewModels
         protected override void Dispose()
         {
             _selectedCircle.PropertyChanged -= SelectedCircle_VisibilityChanged;
+            _selectedCircle.CenterPoint.PropertyChanged -= CenterPoint_PropertyChanged;
+            _selectedCircle.OutlinePoint.PropertyChanged -= OutlinePoint_PropertyChanged;
             base.Dispose();
         }
     }
