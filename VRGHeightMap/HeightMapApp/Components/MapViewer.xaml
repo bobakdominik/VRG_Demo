@@ -8,61 +8,71 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:MapViewerViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        
-        <ScrollViewer Grid.Row="0" 
-                          HorizontalScrollBarVisibility="Auto" 
-                          VerticalScrollBarVisibility="Auto">
-            
-            <Grid x:Name="ImageGrid"
-                    Margin="1" 
+    <Border BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer x:Name="ImageScrollViewer"
+                    Grid.Row="0"
+                    HorizontalScrollBarVisibility="Hidden" 
+                    VerticalScrollBarVisibility="Hidden"
+                    MouseMove="ImageGrid_OnMouseMove"
+                    MouseWheel="ImageScrollViewer_OnMouseWheel"
+                    MouseRightButtonDown="ImageScrollViewer_OnMouseRightButtonDown"
+                    MouseRightButtonUp="ImageScrollViewer_OnMouseRightButtonUp"
+                    PreviewMouseWheel="ImageScrollViewer_PreviewMouseWheel">
+
+                <Grid x:Name="ImageGrid"
                     Cursor="{Binding OnMapCursor}"
                     MouseEnter="ImageGrid_OnMouseEnter" 
                     MouseLeave="ImageGrid_OnMouseLeave" 
-                    MouseMove="ImageGrid_OnMouseMove"
                     MouseLeftButtonDown="ImageGrid_MouseLeftButtonDown"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    MaxHeight="800"
-                    MaxWidth="800">
-                
-                <Image 
+                    VerticalAlignment="Center">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="ImageGridScaleTransform" ScaleX="1" ScaleY="1"/>
+                            <TranslateTransform x:Name="ImageGridTranslateTransform" X="0" Y="0"/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+
+                    <Image 
                         x:Name="MapImage" 
                         Source="{Binding HeightMapImage}"
                         Stretch="Uniform"/>
 
-                <Canvas x:Name="CircleCanvas" 
+                    <Canvas x:Name="CircleCanvas" 
                         Background="Transparent"  
                         Height="{Binding ActualHeight, ElementName=MapImage}"
                         Width="{Binding ActualWidth, ElementName=MapImage}"
                         SizeChanged="Canvas_SizeChanged">
 
-                    <ItemsControl ItemsSource="{Binding CircleViewModels}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:CircleImageItem/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Canvas/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                        <ItemsControl ItemsSource="{Binding CircleViewModels}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <local:CircleImageItem/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
 
-                    <local:CircleImageItem 
+                        <local:CircleImageItem 
                         Height="{Binding ActualHeight, ElementName=CircleCanvas}"
                         Width="{Binding ActualWidth, ElementName=CircleCanvas}" 
                         DataContext="{Binding CreatedCircle}"/>
 
-                </Canvas>
-            </Grid>
-        </ScrollViewer>
+                    </Canvas>
+                </Grid>
+            </ScrollViewer>
 
-        <TextBlock Grid.Row="1" Text="{Binding CursorLocationText}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="10"/>
-    </Grid>
+            <TextBlock Grid.Row="1" Text="{Binding CursorLocationText}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="10"/>
+        </Grid>
+    </Border>
 </UserControl>

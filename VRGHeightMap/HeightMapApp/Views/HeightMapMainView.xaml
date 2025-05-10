@@ -43,7 +43,7 @@
                     VerticalAlignment="Stretch"/>
         </Grid>
         
-        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black" Margin="1">
+        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black" Margin="1" CornerRadius="1">
             <Grid  Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HeightMapApp" 
         xmlns:views="clr-namespace:HeightMapApp.Views"
         mc:Ignorable="d"
-        Title="Height Map Viewer" Height="450" Width="800">
+        Title="Height Map Viewer" Height="450" Width="800" WindowState="Maximized">
     <Grid>
         <views:HeightMapMainView/>
     </Grid>
