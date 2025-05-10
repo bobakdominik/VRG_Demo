@@ -3,28 +3,31 @@ using System.Windows.Media;
 
 namespace HeightMapApp.Models
 {
+    /// <summary>
+    /// Represents a circle defined by two points: the center point and an outline point.
+    /// </summary>
     class TwoPointCircle : INotifyPropertyChanged
     {
         private readonly HeightMapPoint _centerPoint;
         private readonly HeightMapPoint _outlinePoint;
         private readonly Brush _brush;
         private readonly string _name;
-        private bool _visible;
+        private bool _isVisible;
 
         public string Name => _name;
         public HeightMapPoint CenterPoint => _centerPoint;
         public HeightMapPoint OutlinePoint => _outlinePoint;
         public Brush Brush => _brush;
-        public bool Visible
+        public bool IsVisible
         {
             get
             {
-                return _visible;
+                return _isVisible;
             }
             set
             {
-                _visible = value;
-                OnPropertyChanged(nameof(Visible));
+                _isVisible = value;
+                OnPropertyChanged(nameof(IsVisible));
             }
         }
 
@@ -39,7 +42,6 @@ namespace HeightMapApp.Models
                 return Math.Sqrt(Math.Pow(xLength, 2) + Math.Pow(yLength, 2));
             }
         }
-
         public double RadiusForMap
         {
             get
@@ -49,14 +51,21 @@ namespace HeightMapApp.Models
                 return Math.Sqrt(Math.Pow(xLength, 2) + Math.Pow(yLength, 2));
             }
         }
-        
+
+        /// <summary>
+        /// Constructor for TwoPointCircle.
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <param name="centerPoint">Center point</param>
+        /// <param name="outlinePoint">Outline point</param>
+        /// <param name="brush">Brush</param>
         public TwoPointCircle(string name, HeightMapPoint centerPoint, HeightMapPoint outlinePoint, Brush brush)
         {
             _name = name;
             _centerPoint = centerPoint;
             _outlinePoint = outlinePoint;
             _brush = brush;
-            _visible = true;
+            _isVisible = true;
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

@@ -4,6 +4,9 @@ using System.Windows.Media;
 
 namespace HeightMapApp.Services
 {
+    /// <summary>
+    /// Service for creating and managing circles on a height map.
+    /// </summary>
     internal class CircleCreator : INotifyPropertyChanged, IDisposable
     {
         private readonly CircleRepository _circleRepository;
@@ -13,7 +16,6 @@ namespace HeightMapApp.Services
         private bool _creatingCircle;
         private bool _isFirstPointSet;
         private int _createdCirclesCount;
-
 
         public TwoPointCircle? Circle
         {
@@ -40,11 +42,11 @@ namespace HeightMapApp.Services
                 if (_cursorCoordinates != value)
                 {
                     _cursorCoordinates = value;
+                    if (_cursorCoordinates != null)
+                    {
+                        _cursorCoordinates.PropertyChanged += CursorCoordinates_PropertyChanged;
+                    }
                     OnPropertyChanged(nameof(CursorCoordinates));
-                }
-                if (_cursorCoordinates != null)
-                {
-                    _cursorCoordinates.PropertyChanged += CursorCoordinates_PropertyChanged;
                 }
             }
         }
@@ -64,6 +66,10 @@ namespace HeightMapApp.Services
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        /// <summary>
+        /// Constructor for CircleCreator.
+        /// </summary>
+        /// <param name="circleRepository">Circle repository</param>
         public CircleCreator(CircleRepository circleRepository) 
         {
             _circleRepository = circleRepository;
@@ -71,6 +77,9 @@ namespace HeightMapApp.Services
             ResetCircleCreation();
         }
 
+        /// <summary>
+        /// Resets the circle creation process.
+        /// </summary>
         public void ResetCircleCreation()
         {
             IsCreatingCircle = false;
@@ -78,6 +87,9 @@ namespace HeightMapApp.Services
             Circle = null;
         }
 
+        /// <summary>
+        /// Starts the circle creation process.
+        /// </summary>
         public void StartCircleCreation()
         {
             if (!IsCreatingCircle && CursorCoordinates != null)
@@ -91,6 +103,10 @@ namespace HeightMapApp.Services
             }
         }
 
+        /// <summary>
+        /// Saves the current location of the cursor as a point in the circle.
+        /// First call saves center point, second call saves outline point and adds the circle to the repository.
+        /// </summary>
         public void SaveCurrentLocation()
         {
             if (IsCreatingCircle)

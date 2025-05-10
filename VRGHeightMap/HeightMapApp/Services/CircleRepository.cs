@@ -5,6 +5,9 @@ using System.Collections.ObjectModel;
 
 namespace HeightMapApp.Services
 {
+    /// <summary>
+    /// Repository for managing circles in the application.
+    /// </summary>
     internal class CircleRepository
     {
         private readonly ObservableCollection<TwoPointCircle> _circles;
@@ -15,6 +18,9 @@ namespace HeightMapApp.Services
         public IEnumerable<CircleImageItemViewModel> CircleImageViewModels => _circleImageItemViewModels;
         public IEnumerable<CircleListingItemViewModel> CircleListingViewModels => _circleListingItemViewModels;
 
+        /// <summary>
+        /// Constructor for CircleRepository.
+        /// </summary>
         public CircleRepository()
         {
             _circles = new ObservableCollection<TwoPointCircle>();
@@ -22,6 +28,10 @@ namespace HeightMapApp.Services
             _circleListingItemViewModels = new ObservableCollection<CircleListingItemViewModel>();
         }
 
+        /// <summary>
+        /// Adds a circle to the repository and creates corresponding view models.
+        /// </summary>
+        /// <param name="circle">Circle</param>
         public void AddCircle(TwoPointCircle circle)
         {
             if (!_circles.Contains(circle))
@@ -32,6 +42,10 @@ namespace HeightMapApp.Services
             }            
         }
 
+        /// <summary>
+        /// Removes a circle from the repository and its corresponding view models.
+        /// </summary>
+        /// <param name="circle"></param>
         public void RemoveCircle(TwoPointCircle circle)
         {
             if (_circles.Remove(circle))
@@ -49,6 +63,9 @@ namespace HeightMapApp.Services
             }
         }
 
+        /// <summary>
+        /// Clears all circles and their corresponding view models from the repository.
+        /// </summary>
         public void Clear()
         {
             _circles.Clear();

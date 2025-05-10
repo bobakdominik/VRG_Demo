@@ -5,13 +5,15 @@ using System.Windows.Media;
 
 namespace HeightMapApp.ViewModels
 {
+    /// <summary>
+    /// ViewModel for a circle image item in the UI.
+    /// </summary>
     class CircleImageItemViewModel : ViewModelBase
     {
         private readonly TwoPointCircle _selectedCircle;
         private const double CHalfLineLength = 2.5;
 
         public TwoPointCircle TwoPointCircle => _selectedCircle;
-
         public double CircleX => _selectedCircle.CenterPoint.ViewX - CircleRadius;
         public double CircleY => _selectedCircle.CenterPoint.ViewY - CircleRadius;
         public Brush Brush => _selectedCircle.Brush;
@@ -29,9 +31,12 @@ namespace HeightMapApp.ViewModels
         public double OutlineCrossX2 => _selectedCircle.OutlinePoint.ViewX + CHalfLineLength;
         public double OutlineCrossY2 => _selectedCircle.OutlinePoint.ViewY + CHalfLineLength;
 
-        public Visibility IsVisible => _selectedCircle.Visible ? Visibility.Visible : Visibility.Hidden;
+        public Visibility IsVisible => _selectedCircle.IsVisible ? Visibility.Visible : Visibility.Hidden;
 
-
+        /// <summary>
+        /// Constructor for CircleImageItemViewModel.
+        /// </summary>
+        /// <param name="twoPointCircle">Circle to display</param>
         public CircleImageItemViewModel(TwoPointCircle twoPointCircle)
         {
             _selectedCircle = twoPointCircle;
@@ -69,7 +74,7 @@ namespace HeightMapApp.ViewModels
 
         private void SelectedCircle_VisibilityChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_selectedCircle.Visible))
+            if (e.PropertyName == nameof(_selectedCircle.IsVisible))
             {
                 OnPropertyChanged(nameof(IsVisible));
             }

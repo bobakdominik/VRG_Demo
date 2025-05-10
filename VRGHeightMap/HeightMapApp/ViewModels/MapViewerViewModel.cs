@@ -6,6 +6,9 @@ using System.Windows.Media.Imaging;
 
 namespace HeightMapApp.ViewModels
 {
+    /// <summary>
+    /// ViewModel for the map viewer, responsible for managing the height map and circle creation.
+    /// </summary>
     class MapViewerViewModel : ViewModelBase
     {
         private readonly CircleRepository _circleRepository;
@@ -62,6 +65,11 @@ namespace HeightMapApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Constructor for the MapViewerViewModel.
+        /// </summary>
+        /// <param name="circleRepository">Circle repository</param>
+        /// <param name="circleCreator">Circle Creator</param>
         public MapViewerViewModel(CircleRepository circleRepository, CircleCreator circleCreator)
         {
             _circleRepository = circleRepository;
@@ -74,18 +82,32 @@ namespace HeightMapApp.ViewModels
             ResetCursorPosition();
         }
 
+        /// <summary>
+        /// Sets the height map for the view model.
+        /// </summary>
+        /// <param name="heightMap"></param>
         public void SetHeightMap(ViewableHeightMap heightMap)
         {
             _circleRepository.Clear();
             ViewableHeightMap = heightMap;
         }
 
+        /// <summary>
+        /// Resets the cursor position to default values.
+        /// </summary>
         internal void ResetCursorPosition()
         {
             _cursoCoordinates.ResetCoordinates();
             UpdateCursorLocationText();
         }
 
+        /// <summary>
+        /// Updates the cursor position based on the relative cursor coordinates and view dimensions.
+        /// </summary>
+        /// <param name="relativeCursorY">Relative X cursor position on view in range 0-1</param>
+        /// <param name="relativeCursorX">Relative Y cursor position on view in range 0-1</param>
+        /// <param name="viewHeight">Height of view</param>
+        /// <param name="viewWidth">Width of view</param>
         internal void UpdateCursorPosition(double relativeCursorY, double relativeCursorX, double viewHeight, double viewWidth)
         {
             var normalizedX = (int)(relativeCursorX * ViewableHeightMap.HeightMap.Columns);
@@ -104,11 +126,17 @@ namespace HeightMapApp.ViewModels
             UpdateCursorLocationText();
         }
 
+        /// <summary>
+        /// Saves the current cursor position for circle creation.
+        /// </summary>
         internal void SaveCursorPosition()
         {
             _circleCreator.SaveCurrentLocation();
         }
 
+        /// <summary>
+        /// Cancels circle creation.
+        /// </summary>
         internal void CancelCircleCreation()
         {
             _circleCreator.ResetCircleCreation();

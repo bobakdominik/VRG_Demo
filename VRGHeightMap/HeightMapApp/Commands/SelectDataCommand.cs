@@ -6,14 +6,26 @@ using System.Windows;
 
 namespace HeightMapApp.Commands
 {
+    /// <summary>
+    /// Command to select a height map file and load it into the map viewer.
+    /// </summary>
     internal class SelectDataCommand : CommandBase
     {
         private MapViewerViewModel _mapViewerViewModel;
+
+        /// <summary>
+        /// Constructor for SelectDataCommand.
+        /// </summary>
+        /// <param name="mapViewerViewModel">MapViewer view model</param>
         public SelectDataCommand(MapViewerViewModel mapViewerViewModel)
         {
             _mapViewerViewModel = mapViewerViewModel;
         }
 
+        /// <summary>
+        /// Executes the command to select a height map file and create the height map for MapViewerViewModel.
+        /// </summary>
+        /// <param name="parameter"></param>
         public override void Execute(object? parameter)
         {
             var filePath = GetFilePathFromDialog();

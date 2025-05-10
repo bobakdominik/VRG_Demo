@@ -3,9 +3,23 @@ using System.Globalization;
 
 namespace HeightMapTools.Tools
 {
+    /// <summary>
+    /// This class reads a height map from a file.
+    /// </summary>
     public static class HeightMapFileReader
     {
-
+        /// <summary>
+        /// Reads a height map from a file. The file should be in the format:
+        /// ncols        int
+        /// nrows        int
+        /// xllcorner    double
+        /// yllcorner    double
+        /// cellsize     double
+        /// Matrix ncols*nrows of height values
+        /// </summary>
+        /// <param name="filePath">Path to the file with height map data</param>
+        /// <returns>HeightMap object</returns>
+        /// <exception cref="FormatException">Throws an exception if selected file has a wrong format</exception>
         public static HeightMap ReadHeihtMapFromFile(string filePath)
         {
             using (StreamReader sr = new StreamReader(filePath)) 
@@ -28,11 +42,6 @@ namespace HeightMapTools.Tools
             }
         }
 
-        //ncols        1024
-        //nrows        1024
-        //xllcorner    0.000000000000
-        //yllcorner    0.000000000000
-        //cellsize     1.000000000000
         private static HeightMap CreateHeightMapFromHeader(StreamReader streamReader)
         {
             (string keyColumns, int columns) = GetIntFromHeader(streamReader.ReadLine());

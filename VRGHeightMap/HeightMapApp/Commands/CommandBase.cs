@@ -2,6 +2,9 @@
 
 namespace HeightMapApp.Commands
 {
+    /// <summary>
+    /// Base class for commands in the application.
+    /// </summary>
     internal abstract class CommandBase : ICommand
     {
         public event EventHandler? CanExecuteChanged;

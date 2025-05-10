@@ -1,24 +1,39 @@
 ﻿using HeightMapTools.Models;
 using HeightMapTools.Tools;
 
+/// <summary>
+/// This is a console application that generates a png height nap image :D
+/// Set parameters "_filePath" and "_outputImagePath" to generate the height map image
+/// </summary>
 public class Program
 {
-    static void Main(string[] args)
-    {
-        // "D:\Development\c#\VRG_Demo\heightmap_ASCII"
-        Console.WriteLine("Hello, World!");
-        var heightMap = HeightMapFileReader.ReadHeihtMapFromFile("D:\\Development\\c#\\VRG_Demo\\heightmap_ASCII");
+    private static string _filePath = "";
+    private static string _outputImagePath = "";
 
-        var demoHeightMap = new HeightMap(255, 255, 1, 0,0);
-        for (int r = 0; r < demoHeightMap.Rows; r++)
+    /// <summary>
+    /// Creates a height map from a file and generates a png image.
+    /// </summary>
+    static void Main()
+    {
+        try
         {
-            for (int c = 0; c < demoHeightMap.Columns; c++)
+            var heightMap = HeightMapFileReader.ReadHeihtMapFromFile(_filePath);
+
+            var demoHeightMap = new HeightMap(255, 255, 1, 0, 0);
+            for (int r = 0; r < demoHeightMap.Rows; r++)
             {
-                demoHeightMap[c, r] = c;
+                for (int c = 0; c < demoHeightMap.Columns; c++)
+                {
+                    demoHeightMap[c, r] = c;
+                }
             }
+            var bitmap = HeightMapImageGenerator.CreateBitMapFromHeightMap(heightMap);
+            bitmap.Save(_outputImagePath);
         }
-        var bitmap = HeightMapImageGenerator.CreateBitMapFromHeightMap(heightMap);
-        bitmap.Save("D:\\Development\\c#\\VRG_Demo\\test.png");
-        bitmap.Dispose();
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception thrown: {e.Message}");
+        }
+        
     }
 }
