@@ -12,6 +12,7 @@ namespace HeightMapApp.Services
 
         private bool _creatingCircle;
         private bool _isFirstPointSet;
+        private int _createdCirclesCount;
 
 
         public TwoPointCircle? Circle
@@ -66,6 +67,7 @@ namespace HeightMapApp.Services
         public CircleCreator(CircleRepository circleRepository) 
         {
             _circleRepository = circleRepository;
+            _createdCirclesCount = _circleRepository.Circles.Count();
             ResetCircleCreation();
         }
 
@@ -81,7 +83,7 @@ namespace HeightMapApp.Services
             if (!IsCreatingCircle && CursorCoordinates != null)
             {
                 IsCreatingCircle = true;
-                var name = string.Format($"C{_circleRepository.Circles.Count() + 1}");
+                var name = string.Format($"C{_createdCirclesCount + 1}");
                 var centerPoint = new HeightMapPoint(CursorCoordinates.MapY, CursorCoordinates.MapX, CursorCoordinates.ViewY, CursorCoordinates.ViewX);
                 var outlinePoint = new HeightMapPoint(CursorCoordinates.MapY, CursorCoordinates.MapX, CursorCoordinates.ViewY, CursorCoordinates.ViewX);
                 var brush = CreateRandomBrush();
@@ -108,6 +110,7 @@ namespace HeightMapApp.Services
                 else
                 {
                     _circleRepository.AddCircle(Circle);
+                    _createdCirclesCount++;
                     ResetCircleCreation();
                 }
             }

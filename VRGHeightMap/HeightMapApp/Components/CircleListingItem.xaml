@@ -21,10 +21,12 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Text="{Binding CircleName}" FontSize="15" FontWeight="Bold"/>
-                <Button Grid.Column="1" Width="15" Height="15" Background="White" Command="{Binding DeleteCircleCommand}" CommandParameter="{Binding TwoPointCircle}">
+                <Rectangle Grid.Column="1" HorizontalAlignment="Center" Width="15" Height="15" Fill="{Binding CircleBrush}" Stroke="Black" StrokeThickness="0.5" Margin="5 0"/>
+                <Button Grid.Column="2" Width="15" Height="15" Background="White" Command="{Binding DeleteCircleCommand}" CommandParameter="{Binding TwoPointCircle}">
                     <Image Source="/Resources/DeleteButtonImage.png"/>
                 </Button>
             </Grid>
@@ -39,8 +41,6 @@
                 <CheckBox Grid.Column="1"
                         VerticalContentAlignment="Center"
                         IsChecked="{Binding IsChecked}"/>
-                        <!--Command="{Binding HideCircleCommand}"
-                          CommandParameter="{Binding TwoPointCircle}"-->
             </Grid>
 
             <TextBlock Grid.Row="2" Text="{Binding CircleCenterDescription}" FontSize="12"/>
