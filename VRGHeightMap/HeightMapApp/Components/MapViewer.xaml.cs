@@ -1,4 +1,5 @@
 ﻿using HeightMapApp.ViewModels;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -123,6 +124,23 @@ namespace HeightMapApp.Components
         {
             ImageScrollViewer_OnMouseWheel( sender, e);
             e.Handled = true;
+        }
+
+        private void MapImage_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var descriptor = DependencyPropertyDescriptor.FromProperty(Image.SourceProperty, typeof(Image));
+            descriptor.AddValueChanged(MapImage, MapImage_ImageSourceChanged);
+        }
+
+        private void MapImage_ImageSourceChanged(object? sender, EventArgs e)
+        {
+            ImageGridScaleTransform.CenterX = ImageGrid.ActualWidth / 2;
+            ImageGridScaleTransform.CenterY = ImageGrid.ActualHeight / 2;
+            ImageGridScaleTransform.ScaleX = 1.0;
+            ImageGridScaleTransform.ScaleY = 1.0;
+
+            ImageGridTranslateTransform.X = 0;
+            ImageGridTranslateTransform.Y = 0;
         }
     }
 }

@@ -34,15 +34,15 @@
                     VerticalAlignment="Center">
                     <Grid.RenderTransform>
                         <TransformGroup>
-                            <ScaleTransform x:Name="ImageGridScaleTransform" ScaleX="1" ScaleY="1"/>
-                            <TranslateTransform x:Name="ImageGridTranslateTransform" X="0" Y="0"/>
+                            <ScaleTransform x:Name="ImageGridScaleTransform"/>
+                            <TranslateTransform x:Name="ImageGridTranslateTransform"/>
                         </TransformGroup>
                     </Grid.RenderTransform>
 
                     <Image 
                         x:Name="MapImage" 
                         Source="{Binding HeightMapImage}"
-                        Stretch="Uniform"/>
+                        DataContextChanged="MapImage_DataContextChanged"/>
 
                     <Canvas x:Name="CircleCanvas" 
                         Background="Transparent"  
