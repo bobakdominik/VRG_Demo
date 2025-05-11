@@ -10,6 +10,7 @@ This application loads a height map data and displays it in a 2D view. It allows
 - In top left corner there is a button to load a height map file.
 - Clicking on it will open a file dialog where you can select a height map file.
 - After loading the file, the map will be displayed in the main window.
+- Map can be zoomed in/out using mouse wheel and panned by right mouse button click and drag.
 - On bottom left corner there is a text box, where user can see map coordinates and height based on cursor location on the map (If cursor is outside of the map, text box will display "?" symbol for each value).
 
 #### Creating circles
